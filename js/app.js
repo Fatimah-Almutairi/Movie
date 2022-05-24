@@ -117,8 +117,8 @@ function ShowDetails(movie_id){
       </div>
       <div class="movie-info p-1 d-flex justify-content-end">
   
-       <a><i class="far fa-solid fa-heart btn p-2 fa-2xl fa-beat" style="--fa-animation-duration: 2s;" onclick="Favorite(${item.id})"></i></a> 
-       <a><i class="far fa-bookmark btn fa-2xl p-2 fa-fade" style="--fa-animation-duration: 2s;"> onclick="Watch(${item.id})"></i></a>
+       <a><i class="far fa-solid fa-heart btn p-2 fa-2xl" onclick="Favorite(${item.id})"></i></a> 
+       <a><i class="far fa-bookmark btn fa-2xl p-2"> onclick="watch(${item.id})"></i></a>
        </div>
       <p calss="fs-1">${item.title}</p>
           <p>${item.release_data} | ${genreList} </p>
@@ -133,3 +133,54 @@ function ShowDetails(movie_id){
   }
   
   
+let favList= [];
+let watchList= [];
+
+function watch(movie_id){
+  let watchLs = localStorage.getItem("watchList");
+
+  if (!watchList.includes(movie_id)){
+    watchList.push(movie_id);
+    console.log(watchList, "id WatchList here");
+    localStorage.setItem("watchList" , JSON.stringify(watchList));
+    console.log(localStorage.watchList);
+  }
+}
+
+watchList = [...JSON.parse (localStorage.getItem("watchList"))];
+
+function Favorite(movie_id){
+  if (!favList.includes(movie_id)){
+    favList.push(movie_id);
+    console.log(favList);
+    localStorage.setItem("favList",JSON.stringify(favList));
+    console.log(localStorage.favList);
+  }
+}
+favList =[...JSON.parse(localStorage.getItem("favList"))];
+
+
+
+const form = document.getElementById("form");
+const search = document.getElementById("search");
+
+form.addEventListener("submit", (event) =>{
+  event.preventDefault();
+  const searchTerm = search.value;
+  // document.getElementById("search-title").innerHTML = `${searchTerm}`
+  axios.get(`https://api.themoviedb.org/3/search/movie?api_key=2d6b3291586411f85a61201ca446cbb8&query=${searchTerm}`)
+  .then( (res) => {
+    console.log(res.data.results,"results")
+    document.getElementById("results").innerHTML = res.data.results.map(item =>
+      `
+      <div class="card m-2 rounded-2 shadow text-center p-0" style="width: 14rem;" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="ShowDetails(${item.id})">
+        <img src="${Api_Img+ item.poster_path}" alt="${item.title}">
+      </div>
+     
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog ">
+</div>
+</div> 
+      `).join('')
+  })
+})

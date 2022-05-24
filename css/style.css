@@ -8,3 +8,33 @@ body{
 .navbar .nav-item .nav-link:focus{
     color: grey;
 }
+
+/* .fa-heart{
+    color: white;
+}
+.fa-bookmark{
+    color: white;
+} */
+.search .btn svg{
+    color: white;
+}
+#trending{
+    display: flex;
+overflow: scroll;
+}
+
+/* .movie-info{
+    position: absolute;
+    left: 0;
+    top: 0;
+} */
+
+.btn-remove{
+    position: absolute;
+    top: 0%;
+    right: 0;
+    color: white;
+}
+.btn-remove:hover{
+    color: red;
+}

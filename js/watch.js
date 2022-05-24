@@ -7,7 +7,7 @@ JSON.parse(localStorage.getItem("watchList")).forEach(element => {
     axios.get(`https://api.themoviedb.org/3/movie/${element}?api_key=${Api_Key}&append_to_response=videos,similar,credits`)
     .then((res) => {
         watchList.push(res.data)
-        document.getElementById("w").innerHTML = watchList.map(item => 
+        document.getElementById("watch").innerHTML = watchList.map(item => 
             `
             <div class ="col-4 ms-3">
             <div class= "card">
