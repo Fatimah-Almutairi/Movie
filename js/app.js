@@ -118,7 +118,7 @@ function ShowDetails(movie_id){
       <div class="movie-info p-1 d-flex justify-content-end">
   
        <a><i class="far fa-solid fa-heart btn p-2 fa-2xl" onclick="Favorite(${item.id})"></i></a> 
-       <a><i class="far fa-bookmark btn fa-2xl p-2"> onclick="watch(${item.id})"></i></a>
+       <a><i class="far fa-bookmark btn fa-2xl p-2" onclick="watch(${item.id})"></i></a>
        </div>
       <p calss="fs-1">${item.title}</p>
           <p>${item.release_data} | ${genreList} </p>
@@ -137,17 +137,16 @@ let favList= [];
 let watchList= [];
 
 function watch(movie_id){
-  let watchLs = localStorage.getItem("watchList");
-
   if (!watchList.includes(movie_id)){
-    watchList.push(movie_id);
-    console.log(watchList, "id WatchList here");
-    localStorage.setItem("watchList" , JSON.stringify(watchList));
+    watchList.push(movie_id)
+    console.log(watchList);
+    localStorage.setItem("watchList", JSON.stringify(watchList))
     console.log(localStorage.watchList);
   }
 }
 
-watchList = [...JSON.parse (localStorage.getItem("watchList"))];
+watchList =[...JSON.parse(localStorage.getItem("watchList"))];
+
 
 function Favorite(movie_id){
   if (!favList.includes(movie_id)){

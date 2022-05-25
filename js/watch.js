@@ -27,7 +27,7 @@ function remove(movie_id){
     location.reload();
 }
 
-const clear = document.getElementById("clear");
+const clear = document.getElementById("clear2");
 clear.addEventListener("click", function(){
     localStorage.clear();
     location.reload();
