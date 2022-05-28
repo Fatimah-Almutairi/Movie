@@ -1,13 +1,13 @@
 const Api_Key = '2d6b3291586411f85a61201ca446cbb8';
 const Api_Img= 'https://image.tmdb.org/t/p/w500';
-let watchList= [];
+let watch= [];
 
 
 JSON.parse(localStorage.getItem("watchList")).forEach(element => {
     axios.get(`https://api.themoviedb.org/3/movie/${element}?api_key=${Api_Key}&append_to_response=videos,similar,credits`)
     .then((res) => {
-        watchList.push(res.data)
-        document.getElementById("watch").innerHTML = watchList.map(item => 
+        watch.push(res.data)
+        document.getElementById("watch").innerHTML = watch.map(item => 
             `
             <div class ="col-4 ms-3">
             <div class= "card">
@@ -27,8 +27,9 @@ function remove(movie_id){
     location.reload();
 }
 
-const clear = document.getElementById("clear2");
-clear.addEventListener("click", function(){
+const clearbtn = document.getElementById("clear2");
+clearbtn.addEventListener("click", function(){
+    localStorage.removeItem("watchList");
     localStorage.clear();
     location.reload();
 

@@ -137,6 +137,7 @@ let favList= [];
 let watchList= [];
 
 function watch(movie_id){
+  let watchLs = localStorage.getItem("watchList");
   if (!watchList.includes(movie_id)){
     watchList.push(movie_id)
     console.log(watchList);
@@ -149,6 +150,7 @@ watchList =[...JSON.parse(localStorage.getItem("watchList"))];
 
 
 function Favorite(movie_id){
+  let favoriteLs = localStorage.getItem("favList");
   if (!favList.includes(movie_id)){
     favList.push(movie_id);
     console.log(favList);
@@ -159,17 +161,17 @@ function Favorite(movie_id){
 favList =[...JSON.parse(localStorage.getItem("favList"))];
 
 
-
+const main = document.getElementById('main');
 const form = document.getElementById("form");
 const search = document.getElementById("search");
 
 form.addEventListener("submit", (event) =>{
   event.preventDefault();
   const searchTerm = search.value;
-  // document.getElementById("search-title").innerHTML = `${searchTerm}`
+  document.getElementById("search-title").innerHTML = `${searchTerm}`
   axios.get(`https://api.themoviedb.org/3/search/movie?api_key=2d6b3291586411f85a61201ca446cbb8&query=${searchTerm}`)
   .then( (res) => {
-    console.log(res.data.results,"results")
+    console.log(res.data.results,"result")
     document.getElementById("results").innerHTML = res.data.results.map(item =>
       `
       <div class="card m-2 rounded-2 shadow text-center p-0" style="width: 14rem;" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="ShowDetails(${item.id})">
