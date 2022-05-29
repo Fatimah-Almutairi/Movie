@@ -9,7 +9,6 @@ axios.get(API_Trn)
       console.log(res.data.results)
       document.getElementById("trending").innerHTML = res.data.results.map(trending =>
         `
-        
       <div class="card m-2 rounded-2 shadow justify-content-start" style="width: 16rem;" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="ShowDetails(${trending.id})">
       <img src="${Api_Img+ trending.poster_path}" alt="${trending.title}">
       </div>
@@ -146,7 +145,7 @@ function watch(movie_id){
   }
 }
 
-watchList =[...JSON.parse(localStorage.getItem("watchList"))];
+// watchList =[...JSON.parse(localStorage.getItem("watchList"))];
 
 
 function Favorite(movie_id){
@@ -158,7 +157,7 @@ function Favorite(movie_id){
     console.log(localStorage.favList);
   }
 }
-favList =[...JSON.parse(localStorage.getItem("favList"))];
+// favList =[...JSON.parse(localStorage.getItem("favList"))];
 
 
 const main = document.getElementById('main');
@@ -168,7 +167,7 @@ const search = document.getElementById("search");
 form.addEventListener("submit", (event) =>{
   event.preventDefault();
   const searchTerm = search.value;
-  document.getElementById("search-title").innerHTML = `${searchTerm}`
+  document.getElementById("search").innerHTML = `${searchTerm}`
   axios.get(`https://api.themoviedb.org/3/search/movie?api_key=2d6b3291586411f85a61201ca446cbb8&query=${searchTerm}`)
   .then( (res) => {
     console.log(res.data.results,"result")
