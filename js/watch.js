@@ -30,7 +30,7 @@ function remove(movie_id){
 const clearbtn = document.getElementById("btn2");
 clearbtn.addEventListener("click", function(){
     localStorage.removeItem("watchList");
-    localStorage.clear();
+    localStorage.clear("watchList");
     location.reload();
 
 })

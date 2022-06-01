@@ -1,13 +1,13 @@
 const Api_Key = '2d6b3291586411f85a61201ca446cbb8';
 const Api_Img= 'https://image.tmdb.org/t/p/w500';
-let favList= [];
+let fav= [];
 
 
 JSON.parse(localStorage.getItem("favList")).forEach(element => {
     axios.get(`https://api.themoviedb.org/3/movie/${element}?api_key=${Api_Key}&append_to_response=videos,similar,credits`)
     .then((res) => {
-        favList.push(res.data)
-        document.getElementById("favorite").innerHTML = favList.map(item => 
+        fav.push(res.data)
+        document.getElementById("favorite").innerHTML = fav.map(item => 
             `
             <div class ="col-4 ms-3">
             <div class= "card">
@@ -27,10 +27,10 @@ function remove(movie_id){
     location.reload();
 }
 
-const clear = document.getElementById("btn1");
-clear.addEventListener("click", function(){
+const clearbtn = document.getElementById("btn1");
+clearbtn.addEventListener("click", function(){
     localStorage.removeItem("favList")
-    localStorage.clear();
+    localStorage.clear("favList");
     location.reload();
 
 })
